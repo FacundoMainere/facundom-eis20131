@@ -26,9 +26,9 @@ def es_de_fibonacci(un_numero)
   if un_numero == 0
     return true
   end
-  primer_candidato = Math.sqrt(5*(un_numero**2)+4)
-  segundo_candidato = Math.sqrt(5*(un_numero**2)-4)
+  primer_candidato = Math.sqrt((5*(un_numero**2))+4)
+  segundo_candidato = Math.sqrt((5*(un_numero**2))-4)
   primer_candidato_es_cuadrado_perfecto = primer_candidato == primer_candidato.floor
-  segundo_candidato_es_cuadrado_perfecto = primer_candidato == segundo_candidato.floor
+  segundo_candidato_es_cuadrado_perfecto = segundo_candidato == segundo_candidato.floor
   return primer_candidato_es_cuadrado_perfecto || segundo_candidato_es_cuadrado_perfecto
 end 
