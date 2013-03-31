@@ -26,8 +26,8 @@ def es_de_fibonacci(un_numero)
   if un_numero == 0
     return true
   end
-  primer_candidato = (5*(un_numero**2))+4
-  segundo_candidato = (5*(un_numero**2))-4
+  primer_candidato = 5*un_numero**2+4
+  segundo_candidato = 5*un_numero**2-4
   es_cuadrado_perfecto(primer_candidato) || es_cuadrado_perfecto(segundo_candidato)
 end 
 
