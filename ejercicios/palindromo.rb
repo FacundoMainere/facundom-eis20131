@@ -20,8 +20,6 @@ class PalindromoTest < Test::Unit::TestCase
 end
 
 def es_palindromo(palabra)
-  until palabra == "" || palabra[0] != palabra[-1]
-    palabra = palabra[1..-2]
-  end
-  return palabra == ""
+  palabraSinEspacios = palabra.strip
+  palabraSinEspacios.reverse == palabraSinEspacios
 end
