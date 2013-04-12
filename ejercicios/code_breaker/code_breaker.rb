@@ -1,4 +1,5 @@
 require 'set'
+require './code_breaker_exceptions.rb'
 
 class CodeBreaker
     
@@ -13,7 +14,7 @@ class CodeBreaker
   
   def its_only_alphabetic(code)
     if /[[:alpha:]]+/.match(code).to_s != code
-      raise 'You can only use alphabetic characters'
+      raise CodeBreakerExceptions::InvalidCodeError
     end
   end
 
@@ -27,14 +28,14 @@ class CodeBreaker
 
   def game_status
     case
-      when dead? then 'You are dead, the secret word was ' << code << '!'
-      when win? then 'You win! the secret word was ' << code << '!'
+      when dead? then raise CodeBreakerExceptions::CodeBreakerDead
+      when win? then raise CodeBreakerExceptions::CodeBreakerWin
       else generate_slots
     end
   end
 
   def dead?
-    life <= 0
+    life == 0
   end
 
   def win?

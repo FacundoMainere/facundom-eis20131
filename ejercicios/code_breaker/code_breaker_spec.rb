@@ -1,8 +1,16 @@
 require 'rspec'
 require './code_breaker.rb'
+require './code_breaker_exceptions.rb'
 
 describe CodeBreaker do
   attr_reader :code_breaker
+  
+  def handled_guess(guess, exception)
+    begin code_breaker.guess guess 
+    rescue exception 
+    end
+  end
+  
   before(:each) do 
     @code_breaker = CodeBreaker.new('alas')
   end
@@ -68,22 +76,22 @@ describe CodeBreaker do
     
     it 'should raise error when using non-alphanumeric letters' do
     
-      lambda {code_breaker.guess('#')}.should raise_error
+      lambda {code_breaker.guess('#')}.should raise_error CodeBreakerExceptions::InvalidCodeError
     end
     
     it 'should raise error when using numeric letters' do
     
-      lambda {code_breaker.guess('3')}.should raise_error
+      lambda {code_breaker.guess('3')}.should raise_error CodeBreakerExceptions::InvalidCodeError
     end
     
     it 'should not raise error when using alphabetic letters' do
     
-      lambda {code_breaker.guess('a')}.should_not raise_error
+      lambda {code_breaker.guess('a')}.should_not raise_error CodeBreakerExceptions::InvalidCodeError
     end
     
     it 'should not raise error when using uppercase letters' do
     
-      lambda {code_breaker.guess('A')}.should_not raise_error
+      lambda {code_breaker.guess('A')}.should_not raise_error CodeBreakerExceptions::InvalidCodeError
     end
   end
   describe 'generate_slots' do
@@ -113,7 +121,7 @@ describe CodeBreaker do
       
       code_breaker.guess 'a'
       code_breaker.guess 'l'
-      code_breaker.guess 's'
+      handled_guess 's', CodeBreakerExceptions::CodeBreakerWin 
       code_breaker.should be_win
     end
     
@@ -123,10 +131,7 @@ describe CodeBreaker do
       code_breaker.guess 'r'
       code_breaker.guess 'r'
       code_breaker.guess 'r'
-      code_breaker.guess 'r'
-      code_breaker.guess 'a'
-      code_breaker.guess 'l'
-      code_breaker.guess 's'
+      handled_guess 'r', CodeBreakerExceptions::CodeBreakerDead
       code_breaker.should_not be_win
     end 
     
@@ -143,13 +148,13 @@ describe CodeBreaker do
       code_breaker.should_not be_dead
     end
     
-    it 'should be true when you lost all the lifes' do
+    it 'should be true when you lost all the life' do
       
       code_breaker.guess 'r'
       code_breaker.guess 'r'
       code_breaker.guess 'r'
       code_breaker.guess 'r'
-      code_breaker.guess 'r'
+      handled_guess 'r', CodeBreakerExceptions::CodeBreakerDead 
       code_breaker.should be_dead
     end
     
@@ -161,21 +166,21 @@ describe CodeBreaker do
     end
   end
   describe 'game_status' do
-    it 'should return win string when you win' do
+    it 'should raise win exception when you win' do
       
       code_breaker.guess 'a'
       code_breaker.guess 'l'
-      code_breaker.guess 's'
-      code_breaker.game_status.should eq 'You win! the secret word was alas!'
+      handled_guess 's', CodeBreakerExceptions::CodeBreakerWin 
+      lambda{code_breaker.game_status}.should raise_exception CodeBreakerExceptions::CodeBreakerWin
     end
-    it 'should return dead string when dead' do
+    it 'should raise dead exception when you die' do
       
       code_breaker.guess 'r'
       code_breaker.guess 'n'
       code_breaker.guess 'x'
       code_breaker.guess 'm'
-      code_breaker.guess 'o'
-      code_breaker.game_status.should eq 'You are dead, the secret word was alas!'
+      handled_guess 'o', CodeBreakerExceptions::CodeBreakerDead
+      lambda{code_breaker.game_status}.should raise_exception CodeBreakerExceptions::CodeBreakerDead
     end
     it 'should return whole string hidden when beggining game' do
       
@@ -195,21 +200,21 @@ describe CodeBreaker do
   describe 'its_only_alphabetic' do
     it 'should raise an error when passing it a string that has numeric characters' do
  
-      lambda{code_breaker.its_only_alphabetic 'manat33'}.should raise_error
+      lambda{code_breaker.its_only_alphabetic 'manat33'}.should raise_error CodeBreakerExceptions::InvalidCodeError
     end
     it 'should raise an error when passing it a string that has non-alphanumeric characters' do
  
-      lambda{code_breaker.its_only_alphabetic '##trotsky'}.should raise_error
+      lambda{code_breaker.its_only_alphabetic '##trotsky'}.should raise_error CodeBreakerExceptions::InvalidCodeError
     end
     
     it 'should not raise error when using a valid word' do
       
-      lambda{code_breaker.its_only_alphabetic 'trotsky'}.should_not raise_error
+      lambda{code_breaker.its_only_alphabetic 'trotsky'}.should_not raise_error CodeBreakerExceptions::InvalidCodeError
     end
     
     it 'should not raise error when using a valid word with uppercase letters' do
       
-      lambda{code_breaker.its_only_alphabetic 'Trotsky'}.should_not raise_error
+      lambda{code_breaker.its_only_alphabetic 'Trotsky'}.should_not raise_error CodeBreakerExceptions::InvalidCodeError
     end
   end
 end
