@@ -1,5 +1,5 @@
 require 'set'
-require './code_breaker_exceptions.rb'
+require_relative './code_breaker_exceptions'
 
 class CodeBreaker
     
@@ -35,7 +35,7 @@ class CodeBreaker
   end
 
   def dead?
-    life == 0
+    life <= 0
   end
 
   def win?
@@ -43,7 +43,7 @@ class CodeBreaker
   end  
 
   def generate_slots
-    result = ""
+    result = ''
     code.each_char do |char|
       if @tries.include? char 
         result << char 

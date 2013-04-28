@@ -10,7 +10,7 @@ describe CodeBreaker do
     rescue exception 
     end
   end
-  
+
   before(:each) do 
     @code_breaker = CodeBreaker.new('alas')
   end

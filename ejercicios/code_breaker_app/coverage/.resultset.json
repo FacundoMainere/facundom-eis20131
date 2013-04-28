@@ -1,0 +1,40 @@
+{
+  "Cucumber Features": {
+    "coverage": {
+      "/home/facundo/Code/repoIngSoft/ejercicios/code_breaker_app/application.rb": [
+        1,
+        1,
+        null,
+        1,
+        1,
+        null,
+        1,
+        4,
+        4,
+        4,
+        null,
+        null,
+        1,
+        9,
+        9,
+        9,
+        7,
+        4,
+        null,
+        3,
+        null,
+        null,
+        1,
+        1,
+        null,
+        1,
+        1,
+        null,
+        9,
+        null,
+        null
+      ]
+    },
+    "timestamp": 1367171507
+  }
+}

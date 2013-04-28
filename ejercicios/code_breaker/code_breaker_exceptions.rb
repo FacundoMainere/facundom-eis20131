@@ -3,4 +3,3 @@ module CodeBreakerExceptions
   CodeBreakerWin = Class.new Exception
   CodeBreakerDead = Class.new Exception
 end
-  
