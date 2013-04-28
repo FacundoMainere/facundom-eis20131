@@ -20,11 +20,12 @@ class MyApplication < Sinatra::Base
         @resultado_accion = 'ups!'
       end
     rescue CodeBreakerExceptions::CodeBreakerWin
-      @resultado_accion = 'Juego terminado, ganaste'
+      @resultado_juego = 'Juego terminado, ganaste'
       @estado = session[:code_breaker].generate_slots
     rescue CodeBreakerExceptions::CodeBreakerDead
       @resultado_accion = 'ups!'
-      @estado = 'Juego terminado, perdiste'
+      @estado = session[:code_breaker].generate_slots
+      @resultado_juego = 'Juego terminado, perdiste'
     end
     erb :resultado
   end
