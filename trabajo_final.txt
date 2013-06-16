@@ -1,0 +1,30 @@
+Elementos de Ingeniería de Software.
+Año 2013.
+1º Cuatrimestre.
+
+Trabajo Final:
+
+ * Proyecto: René
+   Descripción: Sistema de administración de turnos médicos.
+
+ * Integrantes:
+      - Altamirano, Érica
+      - Mainere, Facundo
+
+ * Planificación del proyecto:
+      https://trello.com/board/rene/519788637169de926e00d78e
+
+ * Repositorio:
+      https://github.com/FacundoMainere/Rene
+
+ * Link a servidor de Integración continua (Travis):
+      https://travis-ci.org/FacundoMainere/Rene
+
+ * Ambiente de staging:
+      https://reneturnos-staging.herokuapp.com
+
+ * Ambiente de producción:
+      https://www.reneturnos.com.ar
+
+ * Demo correspondiente a Review de la iteración #2
+      http://www.screencast.com/t/zmeBaky7
